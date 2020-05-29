@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './layout.css';
+import classes from './Layout.css';
 
 import Aux from '../../hoc/Aux';
 
