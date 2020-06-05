@@ -3,8 +3,14 @@ import React, { Component } from 'react';
 // Component
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
-
 import Aux from '../../hoc/Aux';
+
+const INGREDIENTS_PRICE = {
+  salad: 0.5,
+  cheese: 0.4,
+  bacon: 1.3,
+  meat: 0.7
+}
 
 class BurgerBuilder extends Component {
 
@@ -14,8 +20,19 @@ class BurgerBuilder extends Component {
       bacon: 0,
       cheese: 0,
       meat: 0,
-    }
+    },
+    totalPrice: 4
   }
+
+  addIngredientHandler = (type) => {
+    const oldCount = this.state.ingredients[type];
+    const updateCount = oldCount + 1;
+    const updatedIngredients = { 
+      ...this.state.ingredients
+    };
+    updatedIngredients[type] = updateCount;
+  }
+
   render() {
     return (
     <Aux>
