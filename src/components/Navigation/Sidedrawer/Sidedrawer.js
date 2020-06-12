@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Logo from '../../Logo/Logo';
-import NagationItems from '../NavigationItems/NavigationItems';
+import NavigationItems from '../NavigationItems/NavigationItems';
 import classes from './SideDrawer.css'
 
 const sideDrawer = (props) => {
@@ -12,7 +12,7 @@ const sideDrawer = (props) => {
         <Logo />
       </div>
       <nav>
-        <navigationItems />
+        <NavigationItems />
       </nav>
     </div>
   );
