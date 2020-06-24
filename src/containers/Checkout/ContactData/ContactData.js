@@ -7,14 +7,52 @@ import Input from '../../../components/UI/Input/Input';
 
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    address: {
-      street: "",
-      postalCode: "",
-    },
+    orderFrom: {
+        name: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Your name'
+          },
+          value: ''
+        }, 
+        street: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Street'
+          },
+        }, 
+        zipCode: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'ZIP CODE'
+        },  
+          country: {
+            elementType: 'input',
+            elementConfig: {
+              type: 'text',
+              placeholder: 'Country'
+  
+          },
+        email: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'email',
+            placeholder: 'Your E-mail'
+        },
+        deliveryMethod:{
+          elementType: 'select',
+          elementConfig: {
+            option: [
+              {value: 'fastest', displayValue: 'Fastest'},
+              {value: 'cheapest', displayValue: 'Cheapest'}
+            ]
+          }
+        },
     loading: false
-  };
+  }
 
   orderHandler = (event) => {
     console.log(this.props.ingredients)
@@ -22,17 +60,7 @@ class ContactData extends Component {
     this.setState({ loading: true });
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
-      customer: {
-        name: "Fucker",
-        address: {
-          street: "Hutchison",
-          zipCode: "H3N 2Z1",
-          country: "Canada",
-        },
-        email: "eferole@pixelcircus.ca",
-      },
-      deliveryMethod: "fastest",
+      price: this.props.price
     };
     axios
       .post("/orders.json", order)
@@ -48,10 +76,7 @@ class ContactData extends Component {
   render() {
     let form = (<form action="">
     <Input
-      inputtype="input"
-      type="text"
-      name="name"
-      placeholder="Your Name"
+      elementType="..." elementConfig="..." value="..."
     />
     <Input
       inputtype="input"
