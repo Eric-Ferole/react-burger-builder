@@ -79,21 +79,21 @@ class ContactData extends Component {
           ],
         },
         value: "",
+        validation: {},
+        valid: true
       }
     },
     loading: false,
+    formIsValid: false
   };
 
   orderHandler = (event) => {
-    console.log(this.props.ingredients);
     event.preventDefault();
     this.setState({ loading: true });
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
     }
-
-    console.log('formData', formData)
  
     const order = {
       ingredients: this.props.ingredients,
@@ -130,7 +130,6 @@ class ContactData extends Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    console.log(event.target.value)
     const updateOrderForm = {
       ...this.state.orderForm
     }
@@ -140,8 +139,13 @@ class ContactData extends Component {
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
     updateOrderForm[inputIdentifier] = updatedFormElement;
-    console.log(updatedFormElement)
-    this.setState({orderForm: updateOrderForm});
+
+    let formIsValid = true;
+    for (let inputIdentifier in updateOrderForm) {
+      formIsValid = updateOrderForm[inputIdentifier].valid && formIsValid;
+    }
+    console.log(formIsValid);
+    this.setState({orderForm: updateOrderForm, formIsValid: formIsValid});
   }
 
   render() {
@@ -165,7 +169,7 @@ class ContactData extends Component {
             changed={(event)=> this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        <Button btnType="Success" clicked={this.orderHandler}>
+        <Button btnType="Success" clicked={this.orderHandler} disabled={!this.state.formIsValid}>
           Order
         </Button>
       </form>
