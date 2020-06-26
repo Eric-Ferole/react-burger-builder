@@ -4,10 +4,15 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-dedux';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from './store/reducer';
+
+const store = createStore(reducer);
+
 
 const app = (
-  <Provider>
+  <Provider store={store}>
     <BrowserRouter>
         <App />
     </BrowserRouter>
